@@ -31,8 +31,9 @@ class _RestaurantListState extends fm.State<RestaurantList> {
         ],
       ),
       body: fm.ListView.builder(
+        itemCount: restaurantRecords.length,
         itemBuilder: (ctx, index) => fm.ListTile(
-          title: fm.Text('Restaurant ${restaurantRecords[index]}'),
+          title: fm.Text(restaurantRecords[index]),
         ),
       ),
     );
