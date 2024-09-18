@@ -5,7 +5,7 @@ void main() {
   fm.runApp(
     fm.MaterialApp(
       title: 'RestauranTour',
-      theme: fm.ThemeData.dark().copyWith(
+      theme: fm.ThemeData().copyWith(
         colorScheme: fm.ColorScheme.fromSeed(
             seedColor: fm.Color.fromARGB(255, 148, 62, 28)),
       ),
