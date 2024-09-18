@@ -14,12 +14,17 @@ class _MainMenuState extends fm.State<MainMenu> {
       appBar: fm.AppBar(
         title: const fm.Text('RestauranTour'),
       ),
-      body: const fm.Center(
+      body: fm.Center(
         child: fm.Column(
           mainAxisAlignment: fm.MainAxisAlignment.center,
           children: [
-            fm.Text(
-              'Welcome to RestauranTour!',
+            fm.IconButton(
+              onPressed: () {},
+              icon: const fm.Icon(fm.Icons.restaurant),
+            ),
+            fm.IconButton(
+              onPressed: () {},
+              icon: const fm.Icon(fm.Icons.map),
             ),
           ],
         ),
