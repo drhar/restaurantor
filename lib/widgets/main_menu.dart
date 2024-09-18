@@ -7,7 +7,7 @@ class MainMenu extends fm.StatelessWidget {
     super.key,
   });
 
-  final void Function(screen.AppScreen) onIconPress;
+  final void Function(fm.BuildContext, screen.AppScreen) onIconPress;
 
   @override
   fm.Widget build(fm.BuildContext context) {
@@ -20,11 +20,13 @@ class MainMenu extends fm.StatelessWidget {
           mainAxisAlignment: fm.MainAxisAlignment.center,
           children: [
             fm.IconButton(
-              onPressed: () => onIconPress(screen.AppScreen.restaurantList),
+              onPressed: () =>
+                  onIconPress(context, screen.AppScreen.restaurantList),
               icon: const fm.Icon(fm.Icons.restaurant),
             ),
             fm.IconButton(
-              onPressed: () => onIconPress(screen.AppScreen.restaurantMap),
+              onPressed: () =>
+                  onIconPress(context, screen.AppScreen.restaurantMap),
               icon: const fm.Icon(fm.Icons.map),
             ),
           ],

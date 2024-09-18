@@ -12,24 +12,28 @@ class RestauranTourApp extends fm.StatefulWidget {
 }
 
 class _RestauranTourAppState extends fm.State<RestauranTourApp> {
-  var currentScreen = screen.AppScreen.mainMenu;
   final restaurantRecords = dummy_rr.dummyRestaurantRecords;
 
-  void changeScreen(screen.AppScreen newScreen) {
-    setState(() {
-      currentScreen = newScreen;
-    });
+  void _selectScreen(
+      fm.BuildContext context, screen.AppScreen newScreen) async {
+    await fm.Navigator.of(context).push(
+      fm.MaterialPageRoute(
+        builder: (ctx) {
+          switch (newScreen) {
+            case screen.AppScreen.restaurantList:
+              return rl.RestaurantList(restaurantRecords);
+            case screen.AppScreen.restaurantMap:
+              throw UnimplementedError();
+            default:
+              return mm.MainMenu(_selectScreen);
+          }
+        },
+      ),
+    ).then((_) {});
   }
 
   @override
   fm.Widget build(fm.BuildContext context) {
-    switch (currentScreen) {
-      case screen.AppScreen.mainMenu:
-        return mm.MainMenu(changeScreen);
-      case screen.AppScreen.restaurantList:
-        return rl.RestaurantList(dummy_rr.dummyRestaurantRecords);
-      case screen.AppScreen.restaurantMap:
-        throw UnimplementedError();
-    }
+    return mm.MainMenu(_selectScreen);
   }
 }

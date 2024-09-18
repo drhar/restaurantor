@@ -21,10 +21,7 @@ class _RestaurantListState extends fm.State<RestaurantList> {
       useSafeArea: true,
       context: context,
       builder: (ctx) {
-        return fm.Padding(
-          padding: const fm.EdgeInsets.fromLTRB(0, 48, 0, 0),
-          child: nr.NewRestaurant(),
-        );
+        return nr.NewRestaurant();
       },
     );
   }
@@ -33,12 +30,7 @@ class _RestaurantListState extends fm.State<RestaurantList> {
   fm.Widget build(fm.BuildContext context) {
     return fm.Scaffold(
       appBar: fm.AppBar(
-        title: const fm.Text('RestauranTour'),
         actions: [
-          fm.IconButton(
-            onPressed: () {},
-            icon: const fm.Icon(fm.Icons.arrow_back),
-          ),
           fm.IconButton(
             onPressed: _openAddRestaurantModal,
             icon: const fm.Icon(fm.Icons.add),
