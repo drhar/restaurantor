@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' as fm;
 import 'package:restaurantour/models/app_screen.dart' as screen;
 import 'package:restaurantour/widgets/main_menu.dart' as mm;
 import 'package:restaurantour/widgets/restaurant_list.dart' as rl;
+import 'package:restaurantour/data/dummy_restaurant_records.dart' as dummy_rr;
 
 class RestauranTourApp extends fm.StatefulWidget {
   const RestauranTourApp({super.key});
@@ -12,6 +13,7 @@ class RestauranTourApp extends fm.StatefulWidget {
 
 class _RestauranTourAppState extends fm.State<RestauranTourApp> {
   var currentScreen = screen.AppScreen.mainMenu;
+  final restaurantRecords = dummy_rr.dummyRestaurantRecords;
 
   void changeScreen(screen.AppScreen newScreen) {
     setState(() {
@@ -25,7 +27,7 @@ class _RestauranTourAppState extends fm.State<RestauranTourApp> {
       case screen.AppScreen.mainMenu:
         return mm.MainMenu(changeScreen);
       case screen.AppScreen.restaurantList:
-        return const rl.RestaurantList();
+        return rl.RestaurantList(dummy_rr.dummyRestaurantRecords);
       case screen.AppScreen.restaurantMap:
         throw UnimplementedError();
     }

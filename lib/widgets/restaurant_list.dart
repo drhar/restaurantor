@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart' as fm;
+import 'package:restaurantour/models/restaurant_record.dart' as rr;
 
 class RestaurantList extends fm.StatefulWidget {
-  const RestaurantList({super.key});
+  RestaurantList(
+    this.restaurantRecords, {
+    super.key,
+  });
+
+  final List<rr.RestaurantRecord> restaurantRecords;
 
   @override
   fm.State<RestaurantList> createState() => _RestaurantListState();
 }
 
 class _RestaurantListState extends fm.State<RestaurantList> {
-  final restaurantRecords = [
-    'Restaurant 1',
-    'Restaurant 2',
-    'Restaurant 3',
-  ];
-
   @override
   fm.Widget build(fm.BuildContext context) {
     return fm.Scaffold(
@@ -31,9 +31,9 @@ class _RestaurantListState extends fm.State<RestaurantList> {
         ],
       ),
       body: fm.ListView.builder(
-        itemCount: restaurantRecords.length,
+        itemCount: widget.restaurantRecords.length,
         itemBuilder: (ctx, index) => fm.ListTile(
-          title: fm.Text(restaurantRecords[index]),
+          title: fm.Text(widget.restaurantRecords[index].restaurantName),
         ),
       ),
     );
