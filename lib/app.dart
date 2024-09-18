@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' as fm;
 import 'package:restaurantour/models/app_screen.dart' as screen;
 import 'package:restaurantour/widgets/main_menu.dart' as mm;
+import 'package:restaurantour/widgets/restaurant_list.dart' as rl;
 
 class RestauranTourApp extends fm.StatefulWidget {
   const RestauranTourApp({super.key});
@@ -23,8 +24,10 @@ class _RestauranTourAppState extends fm.State<RestauranTourApp> {
     switch (currentScreen) {
       case screen.AppScreen.mainMenu:
         return mm.MainMenu(changeScreen);
-      default:
-        return mm.MainMenu(changeScreen);
+      case screen.AppScreen.restaurantList:
+        return const rl.RestaurantList();
+      case screen.AppScreen.restaurantMap:
+        throw UnimplementedError();
     }
   }
 }

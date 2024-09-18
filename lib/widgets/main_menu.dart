@@ -3,11 +3,11 @@ import 'package:restaurantour/models/app_screen.dart' as screen;
 
 class MainMenu extends fm.StatelessWidget {
   const MainMenu(
-    this.onPressIcon, {
+    this.onIconPress, {
     super.key,
   });
 
-  final void Function(screen.AppScreen) onPressIcon;
+  final void Function(screen.AppScreen) onIconPress;
 
   @override
   fm.Widget build(fm.BuildContext context) {
@@ -20,11 +20,11 @@ class MainMenu extends fm.StatelessWidget {
           mainAxisAlignment: fm.MainAxisAlignment.center,
           children: [
             fm.IconButton(
-              onPressed: () => onPressIcon(screen.AppScreen.restaurantList),
+              onPressed: () => onIconPress(screen.AppScreen.restaurantList),
               icon: const fm.Icon(fm.Icons.restaurant),
             ),
             fm.IconButton(
-              onPressed: () => onPressIcon(screen.AppScreen.restaurantMap),
+              onPressed: () => onIconPress(screen.AppScreen.restaurantMap),
               icon: const fm.Icon(fm.Icons.map),
             ),
           ],
