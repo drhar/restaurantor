@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart' as fm;
+import 'package:restaurantour/models/app_screen.dart' as screen;
 
-class MainMenu extends fm.StatefulWidget {
-  const MainMenu({super.key});
+class MainMenu extends fm.StatelessWidget {
+  const MainMenu(
+    this.onPressIcon, {
+    super.key,
+  });
 
-  @override
-  fm.State<MainMenu> createState() => _MainMenuState();
-}
+  final void Function(screen.AppScreen) onPressIcon;
 
-class _MainMenuState extends fm.State<MainMenu> {
   @override
   fm.Widget build(fm.BuildContext context) {
     return fm.Scaffold(
@@ -19,11 +20,11 @@ class _MainMenuState extends fm.State<MainMenu> {
           mainAxisAlignment: fm.MainAxisAlignment.center,
           children: [
             fm.IconButton(
-              onPressed: () {},
+              onPressed: () => onPressIcon(screen.AppScreen.restaurantList),
               icon: const fm.Icon(fm.Icons.restaurant),
             ),
             fm.IconButton(
-              onPressed: () {},
+              onPressed: () => onPressIcon(screen.AppScreen.restaurantMap),
               icon: const fm.Icon(fm.Icons.map),
             ),
           ],

@@ -6,12 +6,12 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter_test/flutter_test.dart' as ft;
-import 'package:restaurantour/main.dart' as entry;
+import 'package:restaurantour/app.dart' as app;
 
 void main() {
   ft.testWidgets('Counter increments smoke test',
       (ft.WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const entry.RestauranTourApp());
+    await tester.pumpWidget(const app.RestauranTourApp());
   });
 }
