@@ -10,6 +10,20 @@ class MainMenu extends fm.StatefulWidget {
 class _MainMenuState extends fm.State<MainMenu> {
   @override
   fm.Widget build(fm.BuildContext context) {
-    throw UnimplementedError();
+    return fm.Scaffold(
+      appBar: fm.AppBar(
+        title: const fm.Text('RestauranTour'),
+      ),
+      body: const fm.Center(
+        child: fm.Column(
+          mainAxisAlignment: fm.MainAxisAlignment.center,
+          children: [
+            fm.Text(
+              'Welcome to RestauranTour!',
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

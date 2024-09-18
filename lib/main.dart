@@ -12,10 +12,10 @@ class RestauranTourApp extends fm.StatelessWidget {
   @override
   fm.Widget build(fm.BuildContext context) {
     return fm.MaterialApp(
-      title: 'Flutter Demo',
-      theme: fm.ThemeData(
-        colorScheme: fm.ColorScheme.fromSeed(seedColor: fm.Colors.deepPurple),
-        useMaterial3: true,
+      title: 'RestauranTour',
+      theme: fm.ThemeData().copyWith(
+        colorScheme: fm.ColorScheme.fromSeed(
+            seedColor: fm.Color.fromARGB(255, 148, 62, 28)),
       ),
       home: const main_menu.MainMenu(),
     );
