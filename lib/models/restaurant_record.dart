@@ -7,8 +7,9 @@ class RestaurantRecord {
     required this.date,
     required this.organizer,
     required this.attendees,
-    required this.GoogleMapsUrl,
-  }) : id = uuid.Uuid().v4();
+    required String googleMapsUrl,
+  })  : id = uuid.Uuid().v4(),
+        googleMapsUrl = Uri.parse(googleMapsUrl);
 
   final String id;
   final String restaurantName;
@@ -16,7 +17,7 @@ class RestaurantRecord {
   final DateTime date;
   final String organizer;
   final List<String> attendees;
-  final Uri GoogleMapsUrl;
+  final Uri googleMapsUrl;
 
   get attendeesCount => attendees.length;
 }

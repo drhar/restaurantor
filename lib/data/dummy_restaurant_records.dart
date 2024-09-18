@@ -9,7 +9,7 @@ final dummyRestaurantRecords = [
     attendees: [
       "Dan",
     ],
-    GoogleMapsUrl: Uri.dataFromString("content"),
+    googleMapsUrl: "content",
   ),
   rr.RestaurantRecord(
     restaurantName: "Tasty Treats",
@@ -19,7 +19,7 @@ final dummyRestaurantRecords = [
     attendees: [
       "Chris",
     ],
-    GoogleMapsUrl: Uri.dataFromString("content"),
+    googleMapsUrl: "content",
   ),
   rr.RestaurantRecord(
     restaurantName: "Food Fiesta",
@@ -29,7 +29,7 @@ final dummyRestaurantRecords = [
     attendees: [
       "Taylor",
     ],
-    GoogleMapsUrl: Uri.dataFromString("content"),
+    googleMapsUrl: "content",
   ),
   rr.RestaurantRecord(
     restaurantName: "Gourmet Galaxy",
@@ -39,7 +39,7 @@ final dummyRestaurantRecords = [
     attendees: [
       "Casey",
     ],
-    GoogleMapsUrl: Uri.dataFromString("content"),
+    googleMapsUrl: "content",
   ),
   rr.RestaurantRecord(
     restaurantName: "Savory Spot",
@@ -49,6 +49,6 @@ final dummyRestaurantRecords = [
     attendees: [
       "Pat",
     ],
-    GoogleMapsUrl: Uri.dataFromString("content"),
+    googleMapsUrl: "content",
   ),
 ];
