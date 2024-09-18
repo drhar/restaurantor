@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' as fm;
 import 'package:restaurantour/models/app_screen.dart' as screen;
-import 'package:restaurantour/widgets/main_menu.dart' as mm;
-import 'package:restaurantour/widgets/restaurant_list.dart' as rl;
+import 'package:restaurantour/screens/main_menu.dart' as mm;
+import 'package:restaurantour/screens/restaurant_list.dart' as rl;
 import 'package:restaurantour/data/dummy_restaurant_records.dart' as dummy_rr;
 
 class RestauranTourApp extends fm.StatefulWidget {
