@@ -17,17 +17,25 @@ class MainMenu extends fm.StatelessWidget {
       ),
       body: fm.Center(
         child: fm.Column(
-          mainAxisAlignment: fm.MainAxisAlignment.center,
+          mainAxisAlignment: fm.MainAxisAlignment.start,
           children: [
+            const fm.SizedBox(
+              height: 100,
+            ),
             fm.IconButton(
               onPressed: () =>
                   onIconPress(context, screen.AppScreen.restaurantList),
               icon: const fm.Icon(fm.Icons.restaurant),
+              iconSize: 50,
+            ),
+            const fm.SizedBox(
+              height: 50,
             ),
             fm.IconButton(
               onPressed: () =>
                   onIconPress(context, screen.AppScreen.restaurantMap),
               icon: const fm.Icon(fm.Icons.map),
+              iconSize: 50,
             ),
           ],
         ),
