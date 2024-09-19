@@ -8,7 +8,6 @@ class RestaurantMap extends StatefulWidget {
   // A restaurant's place ID
   static const placeId = 'ChIJB0h73UcbdkgRnGcVVmXz5x4';
   // final restaurant = places.getPlace(place_id);
-  
 
   @override
   State<RestaurantMap> createState() => _RestaurantMapState();
@@ -36,7 +35,7 @@ class _RestaurantMapState extends State<RestaurantMap> {
       );
       _markers[restaurant.name] = marker;
     });
-    }
+  }
 
   @override
   Widget build(BuildContext context) {
