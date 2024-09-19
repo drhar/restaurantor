@@ -18,10 +18,11 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Developing
 
-To run this application locally, you'll need to locate and enable the Google API Keys. **NEVER CHECK THESE IN TO THE CODEBASE**. First, create a `.env`:
+To run this application locally, you'll need to locate and enable the Google API Keys. **NEVER CHECK THESE IN TO THE CODEBASE**. First, create a `.env` and give Android's Gradle infrastructure access to it:
 
 ```
 cp .env.copy .env
+ln -s ../.env android/secrets.properties
 ```
 
 ### Google Maps
