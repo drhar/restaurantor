@@ -7,6 +7,8 @@ class MainMenu extends fm.StatelessWidget {
     super.key,
   });
 
+  static const double _iconSize = 50.0;
+
   final void Function(fm.BuildContext, screen.AppScreen) onIconPress;
 
   @override
@@ -20,22 +22,22 @@ class MainMenu extends fm.StatelessWidget {
           mainAxisAlignment: fm.MainAxisAlignment.start,
           children: [
             const fm.SizedBox(
-              height: 100,
+              height: 2 * _iconSize,
             ),
             fm.IconButton(
               onPressed: () =>
                   onIconPress(context, screen.AppScreen.restaurantList),
-              icon: const fm.Icon(fm.Icons.restaurant),
-              iconSize: 50,
+              icon: const fm.Icon(fm.Icons.dining_rounded),
+              iconSize: _iconSize,
             ),
             const fm.SizedBox(
-              height: 50,
+              height: _iconSize,
             ),
             fm.IconButton(
               onPressed: () =>
                   onIconPress(context, screen.AppScreen.restaurantMap),
               icon: const fm.Icon(fm.Icons.map),
-              iconSize: 50,
+              iconSize: _iconSize,
             ),
           ],
         ),
