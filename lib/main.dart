@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart' as fm;
 import 'package:restaurantour/app.dart' as app;
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
-import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart'
-    as place_picker;
-import 'package:google_maps_flutter/google_maps_flutter.dart' as gm;
+import 'package:google_maps_flutter_android/google_maps_flutter_android.dart'
+    show GoogleMapsFlutterAndroid;
+import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart'
+    show GoogleMapsFlutterPlatform;
 import 'dart:io' show Platform;
 
 Future main() async {
   await dotenv.dotenv.load();
-  if (Platform.isAndroid) {
-    AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
+
+  fm.WidgetsFlutterBinding.ensureInitialized();
+
+  final mapsImplementation = GoogleMapsFlutterPlatform.instance;
+  if (mapsImplementation is GoogleMapsFlutterAndroid) {
+    mapsImplementation.useAndroidViewSurface = true;
   }
 
   fm.runApp(
