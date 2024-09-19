@@ -21,9 +21,18 @@ class _RestaurantListState extends fm.State<RestaurantList> {
       useSafeArea: true,
       context: context,
       builder: (ctx) {
-        return nr.NewRestaurant();
+        return nr.NewRestaurant(_addNewRestaurant);
       },
     );
+  }
+
+  void _addNewRestaurant(
+    fm.BuildContext context,
+    rr.RestaurantRecord newRecord,
+  ) {
+    setState(() {
+      widget.restaurantRecords.add(newRecord);
+    });
   }
 
   @override
