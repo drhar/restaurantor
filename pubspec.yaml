@@ -43,6 +43,9 @@ dependencies:
   google_maps_flutter: ^2.9.0
   country_picker: ^2.0.26
   intl: ^0.19.0
+  http: ^1.2.2
+  dotenv: ^4.2.0
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +69,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  assets:
+    - .env
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
