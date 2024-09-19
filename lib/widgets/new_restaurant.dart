@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' as fm;
 import 'package:restaurantour/models/restaurant_record.dart' as rr;
+import 'package:restaurantour/widgets/new_restaurant_form.dart' as rf;
 
 class NewRestaurant extends fm.StatefulWidget {
   const NewRestaurant(
@@ -14,36 +15,17 @@ class NewRestaurant extends fm.StatefulWidget {
 }
 
 class _NewRestaurantState extends fm.State<NewRestaurant> {
-  // final _titleController = fm.TextEditingController();
-  // final _amountController = fm.TextEditingController();
-  DateTime? _selectedDate;
-
-  // @override
-  // void dispose() {
-  //   _titleController.dispose();
-  //   _amountController.dispose();
-  //   super.dispose();
-  // }
-
-  void _presentDatePicker() async {
-    final now = DateTime.now();
-    final pickedDate = await fm.showDatePicker(
-      context: context,
-      initialDate: now,
-      firstDate: DateTime(now.year - 3, now.month, now.day),
-      lastDate: now,
-    );
-    setState(() {
-      _selectedDate = pickedDate;
-    });
-  }
-
-  void _submitRestaurantData() {
+  void _submitRestaurantData(rr.RestaurantRecord newRestaurant) {
     throw UnimplementedError();
   }
 
   @override
   fm.Widget build(fm.BuildContext context) {
-    throw UnimplementedError();
+    return fm.Padding(
+      padding: const fm.EdgeInsets.all(20),
+      child: rf.NewRestaurantForm(
+        _submitRestaurantData,
+      ),
+    );
   }
 }
