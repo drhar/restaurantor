@@ -21,9 +21,22 @@ class NewRestaurantForm extends fm.StatefulWidget {
 class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
   final _formKey = fm.GlobalKey<fm.FormState>();
   final _restaurantNameController = fm.TextEditingController();
+  final _organizerController = fm.TextEditingController();
+  final _attendeeController = fm.TextEditingController();
+  final List<String> _attendees = [];
+  bool _submitAttempted = false;
   static const double _iconButtonWidth = 100;
+  static const double _columnSpacing = 10;
   cp.Country? _selectedCountry;
   DateTime? _selectedDate;
+
+  @override
+  void dispose() {
+    _restaurantNameController.dispose();
+    _organizerController.dispose();
+    _attendeeController.dispose();
+    super.dispose();
+  }
 
   void _presentCountryPicker() {
     cp.showCountryPicker(
@@ -60,9 +73,12 @@ class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
         children: [
           fm.TextFormField(
             controller: _restaurantNameController,
+            validator: (value) => value == null || value.isEmpty
+                ? 'Please enter the restaurant name.'
+                : null,
             decoration: const fm.InputDecoration(labelText: 'Restaurant Name'),
           ),
-          const fm.SizedBox(height: 10),
+          const fm.SizedBox(height: _columnSpacing),
           fm.Row(
             mainAxisSize: fm.MainAxisSize.max,
             mainAxisAlignment: fm.MainAxisAlignment.center,
@@ -78,9 +94,15 @@ class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
                       icon: _selectedCountry == null
                           ? const fm.Icon(fm.Icons.flag)
                           : const fm.Icon(fm.Icons.flag_outlined),
+                      color: _selectedCountry == null && _submitAttempted
+                          ? fm.Theme.of(context).colorScheme.error
+                          : null,
                     ),
                     if (_selectedCountry != null)
-                      fm.Text(_selectedCountry!.name),
+                      fm.Text(
+                        _selectedCountry!.name,
+                        textAlign: fm.TextAlign.center,
+                      ),
                   ],
                 ),
               ),
@@ -94,6 +116,9 @@ class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
                       icon: _selectedDate == null
                           ? const fm.Icon(fm.Icons.calendar_month)
                           : const fm.Icon(fm.Icons.calendar_month_outlined),
+                      color: _selectedDate == null && _submitAttempted
+                          ? fm.Theme.of(context).colorScheme.error
+                          : null,
                     ),
                     if (_selectedDate != null)
                       fm.Text(dateFormatter.format(_selectedDate!)),
@@ -102,17 +127,121 @@ class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
               ),
               fm.SizedBox(
                 width: _iconButtonWidth,
-                child: fm.IconButton(
-                  onPressed: () {},
-                  icon: const fm.Icon(fm.Icons.pin_drop_rounded),
+                child: fm.Column(
+                  mainAxisAlignment: fm.MainAxisAlignment.start,
+                  children: [
+                    fm.IconButton(
+                      onPressed: () {},
+                      icon: const fm.Icon(fm.Icons.pin_drop_rounded),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-          // Select google maps URL
-          // Who organized
+          const fm.SizedBox(height: _columnSpacing),
+          fm.TextFormField(
+            controller: _organizerController,
+            validator: (value) => value == null || value.isEmpty
+                ? 'Please enter the organizer\'s name.'
+                : null,
+            decoration: const fm.InputDecoration(labelText: 'Organizer'),
+          ),
+          const fm.SizedBox(height: _columnSpacing),
+
           // Who attended
-          // Cancel button and Save button
+          fm.Column(
+            children: [
+              for (final attendee in _attendees)
+                fm.Row(
+                  mainAxisAlignment: fm.MainAxisAlignment.spaceBetween,
+                  children: [
+                    fm.Text(attendee),
+                    fm.IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _attendees.remove(attendee);
+                        });
+                      },
+                      icon: const fm.Icon(fm.Icons.delete),
+                    ),
+                  ],
+                ),
+              fm.TextFormField(
+                controller: _attendeeController,
+                validator: (value) =>
+                    (value == null || value.isEmpty) && _attendees.isEmpty
+                        ? 'Please enter a name.'
+                        : null,
+                onEditingComplete: () {
+                  setState(() {
+                    _attendees.add(_attendeeController.text);
+                    _attendeeController.clear();
+                  });
+                },
+                decoration: const fm.InputDecoration(
+                  labelText: 'Add Attendee',
+                  suffixIcon: fm.Icon(fm.Icons.person_add),
+                ),
+              )
+            ],
+          ),
+
+          const fm.SizedBox(height: 2 * _columnSpacing),
+
+          fm.Row(
+            mainAxisAlignment: fm.MainAxisAlignment.spaceBetween,
+            children: [
+              fm.OutlinedButton(
+                onPressed: () {
+                  fm.Navigator.of(context).pop();
+                },
+                child: const fm.Text('Cancel'),
+              ),
+              fm.OutlinedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate() &&
+                      _selectedCountry != null &&
+                      _selectedDate != null) {
+                    final newRestaurant = rr.RestaurantRecord(
+                      restaurantName: _restaurantNameController.text,
+                      demonym: _selectedCountry!.name,
+                      date: _selectedDate!,
+                      organizer: _organizerController.text,
+                      attendees: [],
+                      googleMapsUrl:
+                          'https://www.google.com/maps/search/?api=1&query=',
+                    );
+                    widget.onSubmitForm(newRestaurant);
+                    fm.Navigator.of(context).pop();
+                  } else {
+                    setState(() {
+                      _submitAttempted = true;
+                    });
+                    fm.showDialog(
+                      context: context,
+                      builder: (ctx) {
+                        return fm.AlertDialog(
+                          title: const fm.Text('Invalid Input'),
+                          content: const fm.Text(
+                              'Please fill in all the required fields.'),
+                          actions: [
+                            fm.TextButton(
+                              onPressed: () {
+                                fm.Navigator.of(ctx).pop();
+                              },
+                              child: const fm.Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                child: const fm.Text('Submit'),
+              ),
+            ],
+          )
         ],
       ),
     );

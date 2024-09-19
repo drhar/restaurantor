@@ -27,7 +27,6 @@ class _RestaurantListState extends fm.State<RestaurantList> {
   }
 
   void _addNewRestaurant(
-    fm.BuildContext context,
     rr.RestaurantRecord newRecord,
   ) {
     setState(() {

@@ -8,7 +8,7 @@ class NewRestaurant extends fm.StatefulWidget {
     super.key,
   });
 
-  final void Function(fm.BuildContext, rr.RestaurantRecord) onAddNew;
+  final void Function(rr.RestaurantRecord) onAddNew;
 
   @override
   fm.State<NewRestaurant> createState() => _NewRestaurantState();
@@ -16,7 +16,7 @@ class NewRestaurant extends fm.StatefulWidget {
 
 class _NewRestaurantState extends fm.State<NewRestaurant> {
   void _submitRestaurantData(rr.RestaurantRecord newRestaurant) {
-    throw UnimplementedError();
+    widget.onAddNew(newRestaurant);
   }
 
   @override
