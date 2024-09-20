@@ -144,6 +144,8 @@ class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
                           context,
                           fm.MaterialPageRoute(
                             builder: (context) => pp.PlacePicker(
+                              enableMapTypeButton: false,
+                              enableMyLocationButton: false,
                               apiKey: Platform.isAndroid
                                   ? "YOUR ANDROID API KEY"
                                   : "YOUR IOS API KEY",
@@ -191,12 +193,30 @@ class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
           const fm.SizedBox(height: _columnSpacing),
           fm.Container(
             height: 10 * _columnSpacing,
-            child: fm.ListView.builder(
-              shrinkWrap: true,
-              itemCount: _attendees.length + 1,
-              itemBuilder: (ctx, index) {
-                if (index == _attendees.length) {
-                  return fm.TextFormField(
+            child: fm.SingleChildScrollView(
+              keyboardDismissBehavior:
+                  fm.ScrollViewKeyboardDismissBehavior.onDrag,
+              child: fm.Column(
+                children: [
+                  for (final attendee in _attendees)
+                    fm.Row(
+                      mainAxisAlignment: fm.MainAxisAlignment.spaceBetween,
+                      children: [
+                        fm.Text(attendee),
+                        fm.IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _attendees.remove(attendee);
+                            });
+                          },
+                          icon: const fm.Icon(fm.Icons.delete),
+                          color: attendee.isEmpty && _submitAttempted
+                              ? fm.Theme.of(context).colorScheme.error
+                              : null,
+                        ),
+                      ],
+                    ),
+                  fm.TextFormField(
                     controller: _attendeeController,
                     validator: (value) =>
                         (value == null || value.isEmpty) && _attendees.isEmpty
@@ -212,60 +232,11 @@ class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
                       labelText: 'Add Attendee',
                       suffixIcon: fm.Icon(fm.Icons.person_add),
                     ),
-                  );
-                }
-                return fm.Row(
-                  mainAxisAlignment: fm.MainAxisAlignment.spaceBetween,
-                  children: [
-                    fm.Text(_attendees[index]),
-                    fm.IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _attendees.removeAt(index);
-                        });
-                      },
-                      icon: const fm.Icon(fm.Icons.delete),
-                    ),
-                  ],
-                );
-              },
+                  )
+                ],
+              ),
             ),
           ),
-          //   children: [
-          //     for (final attendee in _attendees)
-          //       fm.Row(
-          //         mainAxisAlignment: fm.MainAxisAlignment.spaceBetween,
-          //         children: [
-          //           fm.Text(attendee),
-          //           fm.IconButton(
-          //             onPressed: () {
-          //               setState(() {
-          //                 _attendees.remove(attendee);
-          //               });
-          //             },
-          //             icon: const fm.Icon(fm.Icons.delete),
-          //           ),
-          //         ],
-          //       ),
-          //     fm.TextFormField(
-          //       controller: _attendeeController,
-          //       validator: (value) =>
-          //           (value == null || value.isEmpty) && _attendees.isEmpty
-          //               ? 'Please enter a name.'
-          //               : null,
-          //       onEditingComplete: () {
-          //         setState(() {
-          //           _attendees.add(_attendeeController.text);
-          //           _attendeeController.clear();
-          //         });
-          //       },
-          //       decoration: const fm.InputDecoration(
-          //         labelText: 'Add Attendee',
-          //         suffixIcon: fm.Icon(fm.Icons.person_add),
-          //       ),
-          //     )
-          //   ],
-          // ),
           const fm.SizedBox(height: 2 * _columnSpacing),
           fm.Row(
             mainAxisAlignment: fm.MainAxisAlignment.spaceBetween,
