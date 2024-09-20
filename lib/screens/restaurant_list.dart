@@ -16,23 +16,61 @@ class RestaurantList extends fm.StatefulWidget {
 }
 
 class _RestaurantListState extends fm.State<RestaurantList> {
-  void _openAddRestaurantModal() {
+  void _openAddRestaurantModal(rr.RestaurantRecord? record) {
     fm.showModalBottomSheet(
       isScrollControlled: true,
       useSafeArea: true,
       context: context,
       builder: (ctx) {
-        return nr.NewRestaurant(_addNewRestaurant);
+        return nr.NewRestaurant(_editRestaurant, restaurantRecord: record);
       },
     );
   }
 
-  void _addNewRestaurant(
+  void _editRestaurant(
     rr.RestaurantRecord newRecord,
+    rr.RestaurantRecord? existingRecord,
   ) {
     setState(() {
-      widget.restaurantRecords.add(newRecord);
+      if (existingRecord == null) {
+        widget.restaurantRecords.add(newRecord);
+      } else {
+        final index = widget.restaurantRecords
+            .indexWhere((element) => element.id == existingRecord.id);
+        widget.restaurantRecords[index] = newRecord;
+      }
     });
+  }
+
+  void _deleteRestaurant(rr.RestaurantRecord record) {
+    fm.showDialog(
+      context: context,
+      builder: (ctx) {
+        return fm.AlertDialog(
+          title: const fm.Text('Are you sure?'),
+          content: const fm.Text('This action cannot be undone.'),
+          actions: [
+            fm.TextButton(
+              onPressed: () {
+                fm.Navigator.of(ctx).pop();
+              },
+              child: const fm.Text('Cancel'),
+            ),
+            fm.TextButton(
+              onPressed: () {
+                setState(() {
+                  final index = widget.restaurantRecords
+                      .indexWhere((element) => element.id == record.id);
+                  widget.restaurantRecords.removeAt(index);
+                });
+                fm.Navigator.of(ctx).pop();
+              },
+              child: const fm.Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -41,9 +79,12 @@ class _RestaurantListState extends fm.State<RestaurantList> {
         .sort((a, b) => a.country.name.compareTo(b.country.name));
     return fm.Scaffold(
       appBar: fm.AppBar(
+        title: const fm.Text('A - Z List'),
         actions: [
           fm.IconButton(
-            onPressed: _openAddRestaurantModal,
+            onPressed: () {
+              _openAddRestaurantModal(null);
+            },
             icon: const fm.Icon(fm.Icons.add),
           ),
         ],
@@ -52,6 +93,8 @@ class _RestaurantListState extends fm.State<RestaurantList> {
         itemCount: widget.restaurantRecords.length,
         itemBuilder: (ctx, index) => rc.RestaurantCard(
           restaurantRecord: widget.restaurantRecords[index],
+          onEdit: _openAddRestaurantModal,
+          onDelete: _deleteRestaurant,
         ),
       ),
     );

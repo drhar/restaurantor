@@ -5,6 +5,7 @@ import 'package:google_maps_flutter_android/google_maps_flutter_android.dart'
     show GoogleMapsFlutterAndroid;
 import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart'
     show GoogleMapsFlutterPlatform;
+import 'package:flutter/services.dart' as svcs;
 
 Future main() async {
   await dotenv.dotenv.load();
@@ -16,14 +17,14 @@ Future main() async {
     mapsImplementation.useAndroidViewSurface = true;
   }
 
-  fm.runApp(
-    fm.MaterialApp(
-      title: 'RestauranTour',
-      theme: fm.ThemeData().copyWith(
-        colorScheme: fm.ColorScheme.fromSeed(
-            seedColor: fm.Color.fromARGB(255, 24, 60, 151)),
+  svcs.SystemChrome.setPreferredOrientations([
+    svcs.DeviceOrientation.portraitUp,
+  ]).then(
+    (value) => fm.runApp(
+      fm.MaterialApp(
+        title: 'RestauranTour',
+        home: const app.RestauranTourApp(),
       ),
-      home: const app.RestauranTourApp(),
     ),
   );
 }

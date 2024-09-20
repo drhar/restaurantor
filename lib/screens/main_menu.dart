@@ -27,7 +27,7 @@ class MainMenu extends fm.StatelessWidget {
             fm.IconButton(
               onPressed: () =>
                   onIconPress(context, screen.AppScreen.restaurantList),
-              icon: const fm.Icon(fm.Icons.dining_rounded),
+              icon: const fm.Icon(fm.Icons.restaurant),
               iconSize: _iconSize,
             ),
             const fm.SizedBox(

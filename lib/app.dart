@@ -24,7 +24,7 @@ class _RestauranTourAppState extends fm.State<RestauranTourApp> {
             case screen.AppScreen.restaurantList:
               return rl.RestaurantList(restaurantRecords);
             case screen.AppScreen.restaurantMap:
-              return const rm.RestaurantMap();
+              return rm.RestaurantMap(restaurantRecords);
             default:
               return mm.MainMenu(_selectScreen);
           }
