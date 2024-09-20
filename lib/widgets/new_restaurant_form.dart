@@ -5,6 +5,7 @@ import 'package:intl/intl.dart' as intl;
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gm;
 import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart'
     as pp;
+import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import 'dart:io' show Platform;
 
@@ -147,8 +148,8 @@ class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
                               enableMapTypeButton: false,
                               enableMyLocationButton: false,
                               apiKey: Platform.isAndroid
-                                  ? "YOUR ANDROID API KEY"
-                                  : "YOUR IOS API KEY",
+                                  ? dotenv.dotenv.env['MAPS_ANDROID_API_KEY']!
+                                  : dotenv.dotenv.env['MAPS_IOS_API_KEY']!,
                               onPlacePicked: (result) {
                                 setState(() {
                                   _selectedPlaceId = result.placeId;

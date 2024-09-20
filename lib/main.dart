@@ -5,7 +5,6 @@ import 'package:google_maps_flutter_android/google_maps_flutter_android.dart'
     show GoogleMapsFlutterAndroid;
 import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart'
     show GoogleMapsFlutterPlatform;
-import 'dart:io' show Platform;
 
 Future main() async {
   await dotenv.dotenv.load();

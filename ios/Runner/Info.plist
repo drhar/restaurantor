@@ -48,6 +48,6 @@
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 	<key>GMSApiKey</key>
-	<string>IOS API KEY</string>
+	<string>${MAPS_IOS_API_KEY}</string>
 </dict>
 </plist>
