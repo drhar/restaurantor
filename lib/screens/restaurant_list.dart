@@ -35,6 +35,25 @@ class _RestaurantListState extends fm.State<RestaurantList> {
     });
   }
 
+  void _editRestaurant(
+    rr.RestaurantRecord record,
+    rr.RestaurantRecord newRecord,
+  ) {
+    setState(() {
+      final index = widget.restaurantRecords
+          .indexWhere((element) => element.id == record.id);
+      widget.restaurantRecords[index] = newRecord;
+    });
+  }
+
+  void _deleteRestaurant(rr.RestaurantRecord record) {
+    setState(() {
+      final index = widget.restaurantRecords
+          .indexWhere((element) => element.id == record.id);
+      widget.restaurantRecords.removeAt(index);
+    });
+  }
+
   @override
   fm.Widget build(fm.BuildContext context) {
     widget.restaurantRecords
@@ -52,6 +71,8 @@ class _RestaurantListState extends fm.State<RestaurantList> {
         itemCount: widget.restaurantRecords.length,
         itemBuilder: (ctx, index) => rc.RestaurantCard(
           restaurantRecord: widget.restaurantRecords[index],
+          onEdit: _editRestaurant,
+          onDelete: _deleteRestaurant,
         ),
       ),
     );

@@ -5,11 +5,15 @@ import 'package:restaurantour/widgets/restaurant_card_contents.dart' as rcc;
 class RestaurantCard extends fm.StatelessWidget {
   RestaurantCard({
     required this.restaurantRecord,
+    required this.onEdit,
+    required this.onDelete,
     super.key,
   });
 
   static const double padding = 10;
   final rr.RestaurantRecord restaurantRecord;
+  final void Function(rr.RestaurantRecord, rr.RestaurantRecord) onEdit;
+  final void Function(rr.RestaurantRecord) onDelete;
 
   @override
   fm.Widget build(fm.BuildContext context) {
@@ -27,9 +31,19 @@ class RestaurantCard extends fm.StatelessWidget {
                 padding: padding,
               ),
             ),
-            fm.IconButton(
-              onPressed: () {},
-              icon: fm.Icon(fm.Icons.edit),
+            fm.Column(
+              children: [
+                fm.IconButton(
+                  onPressed: () {},
+                  icon: const fm.Icon(fm.Icons.edit),
+                ),
+                fm.IconButton(
+                  onPressed: () {
+                    onDelete(restaurantRecord);
+                  },
+                  icon: const fm.Icon(fm.Icons.delete),
+                )
+              ],
             )
           ],
         ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart' as fm;
 import 'package:country_picker/country_picker.dart' as cp;
 import 'package:restaurantour/models/restaurant_record.dart' as rr;
-import 'package:intl/intl.dart' as intl;
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gm;
 import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart'
     as pp;
