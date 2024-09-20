@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' as fm;
 import 'package:restaurantour/models/restaurant_record.dart' as rr;
 import 'package:restaurantour/widgets/new_restaurant.dart' as nr;
+import 'package:restaurantour/widgets/restaurant_card.dart' as rc;
 
 class RestaurantList extends fm.StatefulWidget {
   RestaurantList(
@@ -47,8 +48,8 @@ class _RestaurantListState extends fm.State<RestaurantList> {
       ),
       body: fm.ListView.builder(
         itemCount: widget.restaurantRecords.length,
-        itemBuilder: (ctx, index) => fm.ListTile(
-          title: fm.Text(widget.restaurantRecords[index].restaurantName),
+        itemBuilder: (ctx, index) => rc.RestaurantCard(
+          restaurantRecord: widget.restaurantRecords[index],
         ),
       ),
     );

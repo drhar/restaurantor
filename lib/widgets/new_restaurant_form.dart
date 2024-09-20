@@ -252,15 +252,16 @@ class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
                 onPressed: () {
                   if (_formKey.currentState!.validate() &&
                       _selectedCountry != null &&
-                      _selectedDate != null) {
+                      _selectedDate != null &&
+                      _selectedPlaceId != null) {
                     final newRestaurant = rr.RestaurantRecord(
                       restaurantName: _restaurantNameController.text,
-                      demonym: _selectedCountry!.name,
+                      country: _selectedCountry!,
                       date: _selectedDate!,
                       organizer: _organizerController.text,
-                      attendees: [],
-                      googleMapsUrl:
-                          'https://www.google.com/maps/search/?api=1&query=',
+                      attendees: _attendees,
+                      googleMapsId: _selectedPlaceId!,
+                      postCode: _selectedPostCode,
                     );
                     widget.onSubmitForm(newRestaurant);
                     fm.Navigator.of(context).pop();
