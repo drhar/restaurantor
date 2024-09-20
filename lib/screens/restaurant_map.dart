@@ -36,10 +36,10 @@ class _RestaurantMapState extends State<RestaurantMap> {
     final BitmapDescriptor icon = await _getMarkerMapBitmap(context);
     final restuarantPlaces = [];
     for (final rr.RestaurantRecord resRecord in widget.restaurantRecords) {
-        final restaurant = await places.getPlace(resRecord.googleMapsId);
-        restuarantPlaces.add(restaurant);
+      final restaurant = await places.getPlace(resRecord.googleMapsId);
+      restuarantPlaces.add(restaurant);
     }
-    
+
     setState(() {
       _markers.clear();
       for (final restaurant in restuarantPlaces) {
@@ -56,7 +56,7 @@ class _RestaurantMapState extends State<RestaurantMap> {
             snippet: restaurant.formattedAddress,
           ),
         );
-      _markers[restaurant.name] = marker;
+        _markers[restaurant.name] = marker;
       }
     });
   }
@@ -68,6 +68,10 @@ class _RestaurantMapState extends State<RestaurantMap> {
         appBar: AppBar(
           title: const Text('A - Z Map'),
           elevation: 2,
+          centerTitle: true,
+          leading: BackButton(
+            onPressed: () => Navigator.pop(context),
+          ),
         ),
         body: GoogleMap(
           onMapCreated: _onMapCreated,

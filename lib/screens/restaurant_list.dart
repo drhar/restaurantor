@@ -79,6 +79,7 @@ class _RestaurantListState extends fm.State<RestaurantList> {
         .sort((a, b) => a.country.name.compareTo(b.country.name));
     return fm.Scaffold(
       appBar: fm.AppBar(
+        title: const fm.Text('A - Z List'),
         actions: [
           fm.IconButton(
             onPressed: () {
