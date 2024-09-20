@@ -43,11 +43,34 @@ class _RestaurantListState extends fm.State<RestaurantList> {
   }
 
   void _deleteRestaurant(rr.RestaurantRecord record) {
-    setState(() {
-      final index = widget.restaurantRecords
-          .indexWhere((element) => element.id == record.id);
-      widget.restaurantRecords.removeAt(index);
-    });
+    fm.showDialog(
+      context: context,
+      builder: (ctx) {
+        return fm.AlertDialog(
+          title: const fm.Text('Are you sure?'),
+          content: const fm.Text('This action cannot be undone.'),
+          actions: [
+            fm.TextButton(
+              onPressed: () {
+                fm.Navigator.of(ctx).pop();
+              },
+              child: const fm.Text('Cancel'),
+            ),
+            fm.TextButton(
+              onPressed: () {
+                setState(() {
+                  final index = widget.restaurantRecords
+                      .indexWhere((element) => element.id == record.id);
+                  widget.restaurantRecords.removeAt(index);
+                });
+                fm.Navigator.of(ctx).pop();
+              },
+              child: const fm.Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
