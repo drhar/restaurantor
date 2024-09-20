@@ -9,8 +9,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 
 import 'dart:io' show Platform;
 
-final dateFormatter = intl.DateFormat('dd/MM/yyyy');
-
 // Define a custom Form widget.
 class NewRestaurantForm extends fm.StatefulWidget {
   const NewRestaurantForm(
@@ -130,7 +128,7 @@ class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
                           : null,
                     ),
                     if (_selectedDate != null)
-                      fm.Text(dateFormatter.format(_selectedDate!)),
+                      fm.Text(rr.dateFormatter.format(_selectedDate!)),
                   ],
                 ),
               ),

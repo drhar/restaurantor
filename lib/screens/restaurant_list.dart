@@ -37,6 +37,8 @@ class _RestaurantListState extends fm.State<RestaurantList> {
 
   @override
   fm.Widget build(fm.BuildContext context) {
+    widget.restaurantRecords
+        .sort((a, b) => a.country.name.compareTo(b.country.name));
     return fm.Scaffold(
       appBar: fm.AppBar(
         actions: [
