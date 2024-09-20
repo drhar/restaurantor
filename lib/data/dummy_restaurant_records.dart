@@ -29,6 +29,12 @@ final dummyRestaurantRecords = [
     organizer: "Morgan",
     attendees: [
       "Taylor",
+      "Jordan",
+      "Casey",
+      "Riley",
+      "Pat",
+      "Alex",
+      "Dan",
     ],
     googleMapsId: "ChIJgUbEo8cfqokR5lP9_Wh_DaM",
   ),
@@ -41,6 +47,7 @@ final dummyRestaurantRecords = [
       "Casey",
     ],
     googleMapsId: "ChIJgUbEo8cfqokR5lP9_Wh_DaM",
+    postCode: "DK-1000",
   ),
   rr.RestaurantRecord(
     restaurantName: "Savory Spot",

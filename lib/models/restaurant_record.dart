@@ -1,5 +1,8 @@
 import 'package:uuid/uuid.dart' as uuid;
 import 'package:country_picker/country_picker.dart' show Country;
+import 'package:intl/intl.dart' as intl;
+
+final dateFormatter = intl.DateFormat('dd/MM/yyyy');
 
 class RestaurantRecord {
   RestaurantRecord({
@@ -22,4 +25,5 @@ class RestaurantRecord {
   final String? postCode;
 
   get attendeesCount => attendees.length + 1;
+  get formattedDate => dateFormatter.format(date);
 }
