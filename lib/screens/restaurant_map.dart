@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:restaurantour/apis/google_places_api.dart' as places;
+import 'package:restaurantour/models/restaurant_record.dart' as rr;
+
+Future<AssetMapBitmap> _getMarkerMapBitmap(BuildContext context) async {
+  final ImageConfiguration imageConfiguration =
+      createLocalImageConfiguration(context);
+  final AssetMapBitmap icon = await AssetMapBitmap.create(
+    imageConfiguration,
+    'images/marker.png',
+    width: 64,
+  );
+  return icon;
+}
 
 class RestaurantMap extends StatefulWidget {
-  const RestaurantMap({super.key});
+  RestaurantMap(this.restaurantRecords, {super.key});
+  final List<rr.RestaurantRecord> restaurantRecords;
 
   // A restaurant's place ID
   static const placeId = 'ChIJB0h73UcbdkgRnGcVVmXz5x4';
@@ -19,21 +32,32 @@ class _RestaurantMapState extends State<RestaurantMap> {
   final LatLng _center = const LatLng(51.508206, -0.125033);
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
-    final restaurant = await places.getPlace(RestaurantMap.placeId);
+    // final restaurant = await places.getPlace(RestaurantMap.placeId);
+    final BitmapDescriptor icon = await _getMarkerMapBitmap(context);
+    final restuarantPlaces = [];
+    for (final rr.RestaurantRecord resRecord in widget.restaurantRecords) {
+        final restaurant = await places.getPlace(resRecord.googleMapsId);
+        restuarantPlaces.add(restaurant);
+    }
+    
     setState(() {
       _markers.clear();
-      final marker = Marker(
-        markerId: MarkerId(restaurant.name),
-        position: LatLng(
-          restaurant.latitude,
-          restaurant.longitude,
-        ),
-        infoWindow: InfoWindow(
-          title: restaurant.name,
-          snippet: restaurant.formattedAddress,
-        ),
-      );
+      for (final restaurant in restuarantPlaces) {
+        final marker = Marker(
+          markerId: MarkerId(restaurant.name),
+          anchor: const Offset(0.7, 0.9),
+          icon: icon,
+          position: LatLng(
+            restaurant.latitude,
+            restaurant.longitude,
+          ),
+          infoWindow: InfoWindow(
+            title: restaurant.name,
+            snippet: restaurant.formattedAddress,
+          ),
+        );
       _markers[restaurant.name] = marker;
+      }
     });
   }
 
