@@ -3,53 +3,53 @@ import 'package:country_picker/country_picker.dart' show Country;
 
 final dummyRestaurantRecords = [
   rr.RestaurantRecord(
-    restaurantName: "YumYum",
-    country: Country.parse("United Kingdom"),
+    restaurantName: "Land of Fire",
+    country: Country.parse("Azerbaijan"),
     date: DateTime.now(),
     organizer: "Alex",
     attendees: [
       "Dan",
     ],
-    googleMapsId: "ChIJgUbEo8cfqokR5lP9_Wh_DaM",
+    googleMapsId: "ChIJB0h73UcbdkgRnGcVVmXz5x4",
   ),
   rr.RestaurantRecord(
-    restaurantName: "Tasty Treats",
-    country: Country.parse("United States"),
+    restaurantName: "Charista",
+    country: Country.parse("Bangladesh"),
     date: DateTime.now().subtract(Duration(days: 1)),
     organizer: "Jamie",
     attendees: [
       "Chris",
     ],
-    googleMapsId: "ChIJgUbEo8cfqokR5lP9_Wh_DaM",
+    googleMapsId: "ChIJ8dCGKfwddkgRtwTr9GurFL8",
   ),
   rr.RestaurantRecord(
-    restaurantName: "Food Fiesta",
-    country: Country.parse("France"),
+    restaurantName: "Crystal China",
+    country: Country.parse("China"),
     date: DateTime.now().subtract(Duration(days: 2)),
     organizer: "Morgan",
     attendees: [
       "Taylor",
     ],
-    googleMapsId: "ChIJgUbEo8cfqokR5lP9_Wh_DaM",
+    googleMapsId: "ChIJhxHeK10DdkgRH8jAxPLAjeM",
   ),
   rr.RestaurantRecord(
-    restaurantName: "Gourmet Galaxy",
-    country: Country.parse("Denmark"),
+    restaurantName: "Negril",
+    country: Country.parse("Jamaica"),
     date: DateTime.now().subtract(Duration(days: 3)),
     organizer: "Jordan",
     attendees: [
       "Casey",
     ],
-    googleMapsId: "ChIJgUbEo8cfqokR5lP9_Wh_DaM",
+    googleMapsId: "ChIJocH8lkAEdkgRYilAGNbpxUk",
   ),
   rr.RestaurantRecord(
-    restaurantName: "Savory Spot",
-    country: Country.parse("Germany"),
+    restaurantName: "BAPJO",
+    country: Country.parse("South Korea"),
     date: DateTime.now().subtract(Duration(days: 4)),
     organizer: "Riley",
     attendees: [
       "Pat",
     ],
-    googleMapsId: "ChIJgUbEo8cfqokR5lP9_Wh_DaM",
+    googleMapsId: "ChIJfZ842nMFdkgRBfolNpjxj3M",
   ),
 ];

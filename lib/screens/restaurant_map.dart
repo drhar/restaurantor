@@ -15,7 +15,6 @@ Future<AssetMapBitmap> _getMarkerMapBitmap(BuildContext context) async {
 }
 
 class RestaurantMap extends StatefulWidget {
-  
   RestaurantMap(this.restaurantRecords, {super.key});
   final List<rr.RestaurantRecord> restaurantRecords;
 
@@ -33,24 +32,32 @@ class _RestaurantMapState extends State<RestaurantMap> {
   final LatLng _center = const LatLng(51.508206, -0.125033);
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
-    final restaurant = await places.getPlace(RestaurantMap.placeId);
+    // final restaurant = await places.getPlace(RestaurantMap.placeId);
     final BitmapDescriptor icon = await _getMarkerMapBitmap(context);
+    final restuarantPlaces = [];
+    for (final rr.RestaurantRecord resRecord in widget.restaurantRecords) {
+        final restaurant = await places.getPlace(resRecord.googleMapsId);
+        restuarantPlaces.add(restaurant);
+    }
+    
     setState(() {
       _markers.clear();
-      final marker = Marker(
-        markerId: MarkerId(restaurant.name),
-        anchor: const Offset(0.7, 0.9),
-        icon: icon,
-        position: LatLng(
-          restaurant.latitude,
-          restaurant.longitude,
-        ),
-        infoWindow: InfoWindow(
-          title: restaurant.name,
-          snippet: restaurant.formattedAddress,
-        ),
-      );
+      for (final restaurant in restuarantPlaces) {
+        final marker = Marker(
+          markerId: MarkerId(restaurant.name),
+          anchor: const Offset(0.7, 0.9),
+          icon: icon,
+          position: LatLng(
+            restaurant.latitude,
+            restaurant.longitude,
+          ),
+          infoWindow: InfoWindow(
+            title: restaurant.name,
+            snippet: restaurant.formattedAddress,
+          ),
+        );
       _markers[restaurant.name] = marker;
+      }
     });
   }
 
