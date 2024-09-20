@@ -59,4 +59,37 @@ final dummyRestaurantRecords = [
     ],
     googleMapsId: "ChIJfZ842nMFdkgRBfolNpjxj3M",
   ),
+  rr.RestaurantRecord(
+    restaurantName: "Andy's Greek Taverna",
+    country: Country.parse("Greece"),
+    date: DateTime.now().subtract(Duration(days: 3)),
+    organizer: "Riley",
+    attendees: [
+      "Pat",
+    ],
+    googleMapsId: "ChIJRyzDxB8bdkgRSHoXhUaj5gk",
+    postCode: "NW1 0BE",
+  ),
+  rr.RestaurantRecord(
+    restaurantName: "Uzbek Corner",
+    country: Country.parse("Uzbekistan"),
+    date: DateTime.now().subtract(Duration(days: 4)),
+    organizer: "Riley",
+    attendees: [
+      "Pat",
+    ],
+    googleMapsId: "ChIJ2aYbjVUFdkgRkeP7FsawL90",
+    postCode: "W2 4QJ",
+  ),
+  rr.RestaurantRecord(
+    restaurantName: "Viet Food",
+    country: Country.parse("Vietnam"),
+    date: DateTime.now().subtract(Duration(days: 4)),
+    organizer: "Riley",
+    attendees: [
+      "Pat",
+    ],
+    googleMapsId: "ChIJe6OwstMEdkgRzVxXSkiLKq4",
+    postCode: "W1D 6QT",
+  ),
 ];

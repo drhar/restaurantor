@@ -65,6 +65,7 @@ class _RestaurantMapState extends State<RestaurantMap> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        extendBodyBehindAppBar: false,
         appBar: AppBar(
           title: const Text('A - Z Map'),
           elevation: 2,
@@ -74,6 +75,7 @@ class _RestaurantMapState extends State<RestaurantMap> {
           ),
         ),
         body: GoogleMap(
+          myLocationButtonEnabled: false,
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
             target: _center,
