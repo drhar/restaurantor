@@ -2,6 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:restaurantour/apis/google_places_api.dart' as places;
 
+Future<AssetMapBitmap> _getMarkerMapBitmap(BuildContext context) async {
+  final ImageConfiguration imageConfiguration =
+      createLocalImageConfiguration(context);
+  final AssetMapBitmap icon = await AssetMapBitmap.create(
+    imageConfiguration,
+    'images/marker.png',
+    width: 64,
+  );
+  return icon;
+}
+
 class RestaurantMap extends StatefulWidget {
   const RestaurantMap({super.key});
 
@@ -20,10 +31,13 @@ class _RestaurantMapState extends State<RestaurantMap> {
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
     final restaurant = await places.getPlace(RestaurantMap.placeId);
+    final BitmapDescriptor icon = await _getMarkerMapBitmap(context);
     setState(() {
       _markers.clear();
       final marker = Marker(
         markerId: MarkerId(restaurant.name),
+        anchor: const Offset(0.7, 0.9),
+        icon: icon,
         position: LatLng(
           restaurant.latitude,
           restaurant.longitude,
