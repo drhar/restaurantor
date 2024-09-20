@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:restaurantour/apis/google_places_api.dart' as places;
+import 'package:restaurantour/models/restaurant_record.dart' as rr;
 
 Future<AssetMapBitmap> _getMarkerMapBitmap(BuildContext context) async {
   final ImageConfiguration imageConfiguration =
@@ -14,7 +15,9 @@ Future<AssetMapBitmap> _getMarkerMapBitmap(BuildContext context) async {
 }
 
 class RestaurantMap extends StatefulWidget {
-  const RestaurantMap({super.key});
+  
+  RestaurantMap(this.restaurantRecords, {super.key});
+  final List<rr.RestaurantRecord> restaurantRecords;
 
   // A restaurant's place ID
   static const placeId = 'ChIJB0h73UcbdkgRnGcVVmXz5x4';
