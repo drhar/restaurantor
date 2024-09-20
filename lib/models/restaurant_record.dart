@@ -1,23 +1,25 @@
 import 'package:uuid/uuid.dart' as uuid;
+import 'package:country_picker/country_picker.dart' show Country;
 
 class RestaurantRecord {
   RestaurantRecord({
     required this.restaurantName,
-    required this.demonym,
+    required this.country,
     required this.date,
     required this.organizer,
     required this.attendees,
-    required String googleMapsUrl,
-  })  : id = uuid.Uuid().v4(),
-        googleMapsUrl = Uri.parse(googleMapsUrl);
+    required this.googleMapsId,
+    this.postCode,
+  }) : id = uuid.Uuid().v4();
 
   final String id;
   final String restaurantName;
-  final String demonym;
+  final Country country;
   final DateTime date;
   final String organizer;
   final List<String> attendees;
-  final Uri googleMapsUrl;
+  final String googleMapsId;
+  final String? postCode;
 
-  get attendeesCount => attendees.length;
+  get attendeesCount => attendees.length + 1;
 }

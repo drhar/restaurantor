@@ -1,6 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'dart:convert';
+import 'package:google_maps_flutter_android/google_maps_flutter_android.dart'
+    show GoogleMapsFlutterAndroid;
+import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart'
+    show GoogleMapsFlutterPlatform;
 
 Future<GooglePlace> getPlace(String placeId) async {
   // I think this should live in the application layer - we can send a request to our server, which can own the API key (in a proper way,
@@ -8,7 +12,10 @@ Future<GooglePlace> getPlace(String placeId) async {
   // use with Google.
   var headers = {
     'Content-Type': 'application/json',
-    'X-Goog-Api-Key': dotenv.dotenv.env['MAPS_ANDROID_API_KEY']!,
+    'X-Goog-Api-Key':
+        GoogleMapsFlutterPlatform.instance is GoogleMapsFlutterAndroid
+            ? dotenv.dotenv.env['MAPS_ANDROID_API_KEY']!
+            : dotenv.dotenv.env['MAPS_IOS_API_KEY']!,
     'X-Goog-FieldMask': 'displayName,name,id,formattedAddress,location'
   };
   var request = http.Request(

@@ -1,54 +1,55 @@
 import 'package:restaurantour/models/restaurant_record.dart' as rr;
+import 'package:country_picker/country_picker.dart' show Country;
 
 final dummyRestaurantRecords = [
   rr.RestaurantRecord(
     restaurantName: "YumYum",
-    demonym: "Yumistani",
+    country: Country.parse("United Kingdom"),
     date: DateTime.now(),
     organizer: "Alex",
     attendees: [
       "Dan",
     ],
-    googleMapsUrl: "content",
+    googleMapsId: "ChIJgUbEo8cfqokR5lP9_Wh_DaM",
   ),
   rr.RestaurantRecord(
     restaurantName: "Tasty Treats",
-    demonym: "Treatlandish",
+    country: Country.parse("United States"),
     date: DateTime.now().subtract(Duration(days: 1)),
     organizer: "Jamie",
     attendees: [
       "Chris",
     ],
-    googleMapsUrl: "content",
+    googleMapsId: "ChIJgUbEo8cfqokR5lP9_Wh_DaM",
   ),
   rr.RestaurantRecord(
     restaurantName: "Food Fiesta",
-    demonym: "Fiestavillian",
+    country: Country.parse("France"),
     date: DateTime.now().subtract(Duration(days: 2)),
     organizer: "Morgan",
     attendees: [
       "Taylor",
     ],
-    googleMapsUrl: "content",
+    googleMapsId: "ChIJgUbEo8cfqokR5lP9_Wh_DaM",
   ),
   rr.RestaurantRecord(
     restaurantName: "Gourmet Galaxy",
-    demonym: "Galaxian",
+    country: Country.parse("Denmark"),
     date: DateTime.now().subtract(Duration(days: 3)),
     organizer: "Jordan",
     attendees: [
       "Casey",
     ],
-    googleMapsUrl: "content",
+    googleMapsId: "ChIJgUbEo8cfqokR5lP9_Wh_DaM",
   ),
   rr.RestaurantRecord(
     restaurantName: "Savory Spot",
-    demonym: "Savoryan",
+    country: Country.parse("Germany"),
     date: DateTime.now().subtract(Duration(days: 4)),
     organizer: "Riley",
     attendees: [
       "Pat",
     ],
-    googleMapsUrl: "content",
+    googleMapsId: "ChIJgUbEo8cfqokR5lP9_Wh_DaM",
   ),
 ];
