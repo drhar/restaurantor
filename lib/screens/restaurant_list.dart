@@ -16,33 +16,29 @@ class RestaurantList extends fm.StatefulWidget {
 }
 
 class _RestaurantListState extends fm.State<RestaurantList> {
-  void _openAddRestaurantModal() {
+  void _openAddRestaurantModal(rr.RestaurantRecord? record) {
     fm.showModalBottomSheet(
       isScrollControlled: true,
       useSafeArea: true,
       context: context,
       builder: (ctx) {
-        return nr.NewRestaurant(_addNewRestaurant);
+        return nr.NewRestaurant(_editRestaurant, restaurantRecord: record);
       },
     );
   }
 
-  void _addNewRestaurant(
-    rr.RestaurantRecord newRecord,
-  ) {
-    setState(() {
-      widget.restaurantRecords.add(newRecord);
-    });
-  }
-
   void _editRestaurant(
-    rr.RestaurantRecord record,
     rr.RestaurantRecord newRecord,
+    rr.RestaurantRecord? existingRecord,
   ) {
     setState(() {
-      final index = widget.restaurantRecords
-          .indexWhere((element) => element.id == record.id);
-      widget.restaurantRecords[index] = newRecord;
+      if (existingRecord == null) {
+        widget.restaurantRecords.add(newRecord);
+      } else {
+        final index = widget.restaurantRecords
+            .indexWhere((element) => element.id == existingRecord.id);
+        widget.restaurantRecords[index] = newRecord;
+      }
     });
   }
 
@@ -62,7 +58,9 @@ class _RestaurantListState extends fm.State<RestaurantList> {
       appBar: fm.AppBar(
         actions: [
           fm.IconButton(
-            onPressed: _openAddRestaurantModal,
+            onPressed: () {
+              _openAddRestaurantModal(null);
+            },
             icon: const fm.Icon(fm.Icons.add),
           ),
         ],
@@ -71,7 +69,7 @@ class _RestaurantListState extends fm.State<RestaurantList> {
         itemCount: widget.restaurantRecords.length,
         itemBuilder: (ctx, index) => rc.RestaurantCard(
           restaurantRecord: widget.restaurantRecords[index],
-          onEdit: _editRestaurant,
+          onEdit: _openAddRestaurantModal,
           onDelete: _deleteRestaurant,
         ),
       ),

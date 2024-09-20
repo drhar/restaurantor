@@ -13,9 +13,11 @@ class NewRestaurantForm extends fm.StatefulWidget {
   const NewRestaurantForm(
     this.onSubmitForm, {
     super.key,
+    this.record,
   });
 
-  final void Function(rr.RestaurantRecord) onSubmitForm;
+  final void Function(rr.RestaurantRecord, rr.RestaurantRecord?) onSubmitForm;
+  final rr.RestaurantRecord? record;
 
   @override
   fm.State<NewRestaurantForm> createState() => _NewRestaurantFormState();
@@ -31,6 +33,7 @@ class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
   DateTime? _selectedDate;
   String? _selectedPlaceId;
   String? _selectedPostCode;
+  bool _formLoaded = false;
 
   bool _submitAttempted = false;
   static const double _iconButtonWidth = 100;
@@ -73,6 +76,18 @@ class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
 
   @override
   fm.Widget build(fm.BuildContext context) {
+    if (widget.record != null && !_formLoaded) {
+      _restaurantNameController.text = widget.record!.restaurantName;
+      _selectedCountry = widget.record!.country;
+      _selectedDate = widget.record!.date;
+      _organizerController.text = widget.record!.organizer;
+      _attendees.clear();
+      _attendees.addAll(widget.record!.attendees);
+      _selectedPlaceId = widget.record!.googleMapsId;
+      _selectedPostCode = widget.record!.postCode;
+      _formLoaded = true;
+    }
+
     return fm.Form(
       key: _formKey,
       child: fm.Column(
@@ -260,7 +275,7 @@ class _NewRestaurantFormState extends fm.State<NewRestaurantForm> {
                       googleMapsId: _selectedPlaceId!,
                       postCode: _selectedPostCode,
                     );
-                    widget.onSubmitForm(newRestaurant);
+                    widget.onSubmitForm(newRestaurant, widget.record);
                     fm.Navigator.of(context).pop();
                   } else {
                     setState(() {

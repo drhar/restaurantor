@@ -12,7 +12,7 @@ class RestaurantCard extends fm.StatelessWidget {
 
   static const double padding = 10;
   final rr.RestaurantRecord restaurantRecord;
-  final void Function(rr.RestaurantRecord, rr.RestaurantRecord) onEdit;
+  final void Function(rr.RestaurantRecord?) onEdit;
   final void Function(rr.RestaurantRecord) onDelete;
 
   @override
@@ -34,7 +34,9 @@ class RestaurantCard extends fm.StatelessWidget {
             fm.Column(
               children: [
                 fm.IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    onEdit(restaurantRecord);
+                  },
                   icon: const fm.Icon(fm.Icons.edit),
                 ),
                 fm.IconButton(
